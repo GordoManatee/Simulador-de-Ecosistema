@@ -1,1 +1,9 @@
-# Simulador-de-Ecosistema
+# Simulador de un ecosistema
+
+## Contexto
+Se busca simular un ecosistema cerrado donde interactúan los depredadores y las presas. Para abordarlo, intente identificar correctamente las clases necesarias que modelan la dinámica biológica deacuerdo a las ecuaciones de Lotka-Volterra. La clase principal es "Simulation", encargada de iniciar y controlar la ejecución de la simulación en un número determinado de pasos. Esta clase contiene una instancia de "Ecosystem", que representa el entorno donde se desarrollan las interacciones entre las especies. Dentro del ecosistema, se encuentran las clases "Predator" y "Prey", cada una con atributos y métodos que describen su comportamiento específico. Por ejemplo, el depredador tiene una tasa de éxito al cazar y un número mínimo para asegurar su supervivencia, mientras que la presa posee una tasa de crecimiento y mecanismos de protección. Además, existe la clase "Population", que agrupa los datos de población de ambos organismos y permite simular su evolución conjunta.
+
+## Posibles problemas
+En cuanto a los posibles casos que harían que el proyecto deje de funcionar, se pueden identificar varios riesgos comunes en este tipo de simulaciones, como generar errores matemáticos, por ejemplo, divisiones por cero, en los cálculos de tasas o actualizaciones de población, lo cual es un problema bastante grave. También es importante considerar que las poblaciones podrían descender por debajo de cero, lo que no tiene sentido biológico ni lógico, así que es necesario incluir restricciones que eviten este tipo de resultados, para que la simulación sea lo más realista posible. Otro problema que podría surgir, es si no se controlan bien las condiciones de ejecución del método "run()" en la clase Simulation, ya que esto podría causar un ciclo infinito y detener el programa, lo que sería un desastre. Si los objetos que forman parte del ecosistema no son correctamente inicializados, se podrían producir errores donde no se tenga ninguna referencia.
+
+---![UML](https://github.com/user-attachments/assets/e9480b21-8f07-4f89-a3a5-775a4fc079aa)
