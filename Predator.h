@@ -1,53 +1,41 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
 
-#include <iostream>
-#include <sstream>
-#include <string>
-using namespace std;
-
 #include "Animal.h"
-#include "Simulation.h"
 
-class Predator: public Animal{
-    private:
-        float tasaDepredacion;
-        float tasaReproduccion;
-        float tasaMortalidad;
-        int populationPredator;
-          
+class Predator : public Animal {
+private:
+    float tasaDepredacion;
+    float tasaReproduccion;
+    float tasaMortalidad;
+    int populationPredator;
 
-    public:
-        Predator(): tasaDepredacion(0), tasaReproduccion(0), tasaMortalidad(0), populationPredator(0){};
-        Predator(float tasaD, float tasaR, float tasaM, 
-        string esp, int popPredator){
-            tasaDepredacion = tasaD;
-            tasaReproduccion = tasaR;
-            tasaMortalidad = tasaM;
-            populationPredator = popPredator;
-        }
-        void setDepredacion(float tasaD);
-        float getDepredacion(){return tasaDepredacion;}
-        void setReproduccion(float tasaR);
-        float getReproduccion(){return tasaReproduccion;}
-        void setMortalidad(float tasaM);
-        float getMortalidad(){return tasaMortalidad;}
-        void setPopulationPredator(int popPredator);
-        float getPopulationPredator(){return populationPredator;}
+public:
+    Predator(): Animal("Desconocida"), tasaDepredacion(0), tasaReproduccion(0), tasaMortalidad(0), populationPredator(0) {}
 
+    Predator(float tasaD, float tasaR, float tasaM, string esp, int popPredator)
+        : Animal(esp), tasaDepredacion(tasaD), tasaReproduccion(tasaR), 
+          tasaMortalidad(tasaM), populationPredator(popPredator) {}
 
+    void setDepredacion(float tasaD) { tasaDepredacion = tasaD; }
+    float getDepredacion() const { return tasaDepredacion; }
+
+    void setReproduccion(float tasaR) { tasaReproduccion = tasaR; }
+    float getReproduccion() const { return tasaReproduccion; }
+
+    void setMortalidad(float tasaM) { tasaMortalidad = tasaM; }
+    float getMortalidad() const { return tasaMortalidad; }
+
+    void setPopulationPredator(int popPredator) { populationPredator = popPredator; }
+    int getPopulationPredator() const { return populationPredator; }
+
+    // Sobrescritura del método virtual
+    string getInfo() const override {
+        return "Depredador - Especie: " + specie + ", Depredación: " + to_string(tasaDepredacion) +
+               ", Reproducción: " + to_string(tasaReproduccion) +
+               ", Mortalidad: " + to_string(tasaMortalidad) +
+               ", Población: " + to_string(populationPredator);
+    }
 };
 
-void Predator::setDepredacion(float tasaD){
-    tasaDepredacion = tasaD;
-}
-void Predator::setReproduccion(float tasaR){
-    tasaReproduccion = tasaR;
-}
-void Predator::setMortalidad(float tasaM){
-    tasaMortalidad = tasaM;
-}
-void Predator::setPopulationPredator(int popPredator){
-    populationPredator = popPredator;
-}
 #endif

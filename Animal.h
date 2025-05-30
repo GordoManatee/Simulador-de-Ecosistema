@@ -2,29 +2,26 @@
 #define ANIMAL_H
 
 #include <iostream>
-#include <sstream>
 #include <string>
 using namespace std;
 
-class Animal{
-    protected:
-        string specie;
-        string info;
+class Animal {
+protected:
+    string specie;
+    string info;
 
-    public:
-        Animal(): specie(""){};
-        Animal(string esp){
-            specie = esp;
-        }
-        void setSpecie(string esp);
-        string getSpecie(){return specie;}
-        string getInfo();           
+public:
+    Animal(): specie("Desconocida") {};
+    Animal(string esp): specie(esp) {}
+
+    void setSpecie(string esp) { specie = esp; }
+    string getSpecie() const { return specie; }
+
+    virtual string getInfo() const {  // Método virtual para sobreescribir
+        return "Especie: " + specie;
+    }
+
+    virtual ~Animal() {} // Destructor virtual
 };
 
-void Animal::setSpecie(string esp){
-    specie = esp;
-}
-string Animal::getInfo(){
-
-}
 #endif
