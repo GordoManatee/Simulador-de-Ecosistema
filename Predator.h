@@ -17,25 +17,28 @@ public:
         : Animal(esp), tasaDepredacion(tasaD), tasaReproduccion(tasaR), 
           tasaMortalidad(tasaM), populationPredator(popPredator) {}
 
-    void setDepredacion(float tasaD) { tasaDepredacion = tasaD; }
-    float getDepredacion() const { return tasaDepredacion; }
-
-    void setReproduccion(float tasaR) { tasaReproduccion = tasaR; }
-    float getReproduccion() const { return tasaReproduccion; }
-
-    void setMortalidad(float tasaM) { tasaMortalidad = tasaM; }
-    float getMortalidad() const { return tasaMortalidad; }
-
-    void setPopulationPredator(int popPredator) { populationPredator = popPredator; }
-    int getPopulationPredator() const { return populationPredator; }
-
-    // Sobrescritura del método virtual
+    // Métodos get/set...
     string getInfo() const override {
         return "Depredador - Especie: " + specie + ", Depredación: " + to_string(tasaDepredacion) +
                ", Reproducción: " + to_string(tasaReproduccion) +
                ", Mortalidad: " + to_string(tasaMortalidad) +
                ", Población: " + to_string(populationPredator);
     }
+};
+
+class Zorro : public Predator {
+public:
+    Zorro(int pop) : Predator(0.4, 0.08, 0.5, "Zorro rojo", pop) {}
+};
+
+class Lobo : public Predator {
+public:
+    Lobo(int pop) : Predator(0.35, 0.07, 0.45, "Lobo gris", pop) {}
+};
+
+class Aguila : public Predator {
+public:
+    Aguila(int pop) : Predator(0.3, 0.06, 0.4, "Águila real", pop) {}
 };
 
 #endif

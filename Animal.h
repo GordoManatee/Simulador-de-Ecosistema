@@ -17,11 +17,11 @@ public:
     void setSpecie(string esp) { specie = esp; }
     string getSpecie() const { return specie; }
 
-    virtual string getInfo() const {  // Método virtual para sobreescribir
+    virtual string getInfo() const {
         return "Especie: " + specie;
     }
 
-    virtual ~Animal() {} // Destructor virtual
+    virtual ~Animal() {}
 };
 
 #endif
