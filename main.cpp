@@ -1,76 +1,72 @@
 #include <iostream>
-#include <memory>
-#include "Predator.h"
-#include "Prey.h"
-#include "Ecosystem.h"
+#include <string>
+#include "Simulation.h"
 
 using namespace std;
 
-void mostrarMenu() {
-    cout << "\nSeleccione las especies a simular:\n";
-    cout << "Presas:\n";
-    cout << "1. Conejo blanco\n";
-    cout << "2. Liebre europea\n";
-    cout << "3. Ciervo común\n";
-    
-    cout << "\nDepredadores:\n";
-    cout << "4. Zorro rojo\n";
-    cout << "5. Lobo gris\n";
-    cout << "6. Águila real\n";
+void mostrarInfoAnimal(Animal* a) {
+    cout << a->getInfo() << endl;
 }
 
-unique_ptr<Prey> crearPresa(int opcion, int poblacion) {
+Prey crearPresa() {
+    int opcion, poblacion;
+    cout << "\nSeleccione una especie de presa:\n";
+    cout << "1. Conejo blanco (Natalidad: 0.8)\n";
+    cout << "2. Liebre (Natalidad: 0.6)\n";
+    cout << "3. Ratón de campo (Natalidad: 1.2)\n";
+    cout << "Opción: ";
+    cin >> opcion;
+
+    cout << "Población inicial: ";
+    cin >> poblacion;
+
     switch(opcion) {
-        case 1: return make_unique<Conejo>(poblacion);
-        case 2: return make_unique<Liebre>(poblacion);
-        case 3: return make_unique<Ciervo>(poblacion);
-        default: return make_unique<Conejo>(poblacion);
+        case 1: return Prey(0.8, "Conejo blanco", poblacion);
+        case 2: return Prey(0.6, "Liebre", poblacion);
+        case 3: return Prey(1.2, "Ratón de campo", poblacion);
+        default: return Prey(0.8, "Conejo blanco", poblacion);
     }
 }
 
-unique_ptr<Predator> crearDepredador(int opcion, int poblacion) {
+Predator crearDepredador() {
+    int opcion, poblacion;
+    cout << "\nSeleccione una especie de depredador:\n";
+    cout << "1. Zorro rojo (Dep:0.4, Rep:0.08, Mort:0.5)\n";
+    cout << "2. Lobo (Dep:0.3, Rep:0.05, Mort:0.4)\n";
+    cout << "3. Águila (Dep:0.2, Rep:0.1, Mort:0.6)\n";
+    cout << "Opción: ";
+    cin >> opcion;
+
+    cout << "Población inicial: ";
+    cin >> poblacion;
+
     switch(opcion) {
-        case 4: return make_unique<Zorro>(poblacion);
-        case 5: return make_unique<Lobo>(poblacion);
-        case 6: return make_unique<Aguila>(poblacion);
-        default: return make_unique<Zorro>(poblacion);
+        case 1: return Predator(0.4, 0.08, 0.5, "Zorro rojo", poblacion);
+        case 2: return Predator(0.3, 0.05, 0.4, "Lobo", poblacion);
+        case 3: return Predator(0.2, 0.1, 0.6, "Águila", poblacion);
+        default: return Predator(0.4, 0.08, 0.5, "Zorro rojo", poblacion);
     }
 }
 
 int main() {
-    int opcionPresa, opcionDepredador;
-    int poblacionPresa, poblacionDepredador;
-    int meses;
+    Prey presa = crearPresa();
+    Predator depredador = crearDepredador();
 
-    mostrarMenu();
-    
-    cout << "\nSeleccione una presa (1-3): ";
-    cin >> opcionPresa;
-    cout << "Población inicial: ";
-    cin >> poblacionPresa;
-    
-    cout << "Seleccione un depredador (4-6): ";
-    cin >> opcionDepredador;
-    cout << "Población inicial: ";
-    cin >> poblacionDepredador;
-    
-    cout << "Meses a simular: ";
+    mostrarInfoAnimal(&presa);
+    mostrarInfoAnimal(&depredador);
+
+    int meses;
+    cout << "\n¿Cuántos meses quieres simular?: ";
     cin >> meses;
 
-    auto presa = crearPresa(opcionPresa, poblacionPresa);
-    auto depredador = crearDepredador(opcionDepredador, poblacionDepredador);
+    LotkaVolterraSimulation simulacion;
+    simulacion.simulate(depredador, presa, meses);
 
-    cout << "\nConfiguración inicial:" << endl;
-    cout << presa->getInfo() << endl;
-    cout << depredador->getInfo() << endl;
+    pair<float, float> res = simulacion.getResults();
 
-    Ecosystem ecosistema(depredador.get(), presa.get(), meses);
-    ecosistema.simulate();
-
-    auto resultados = ecosistema.getResults();
     cout << "\nResultados finales:" << endl;
-    cout << "Población de presas: " << resultados.second << endl;
-    cout << "Población de depredadores: " << resultados.first << endl;
+    cout << "Depredadores: " << res.first << endl;
+    cout << "Presas: " << res.second << endl;
 
     return 0;
 }
