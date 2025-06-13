@@ -3,7 +3,7 @@
 ## Contexto
 Se busca simular un ecosistema cerrado donde interactúan los depredadores y las presas. Para abordarlo, intente identificar correctamente las clases necesarias que modelan la dinámica biológica deacuerdo a las ecuaciones de Lotka-Volterra. La clase principal es "Simulation", encargada de iniciar y controlar la ejecución de la simulación en un número determinado de pasos. Esta clase contiene una instancia de "Ecosystem", que representa el entorno donde se desarrollan las interacciones entre las especies. Dentro del ecosistema, se encuentran las clases "Predator" y "Prey", cada una con atributos y métodos que describen su comportamiento específico. Por ejemplo, el depredador tiene una tasa de éxito al cazar y un número mínimo para asegurar su supervivencia, mientras que la presa posee una tasa de crecimiento y mecanismos de protección. Además, existe la clase "Population", que agrupa los datos de población de ambos organismos y permite simular su evolución conjunta.
 
-###Cosas que puede hacer
+### Cosas que puede hacer
 - Simular la evolución de las poblaciones durante un número determinado de ciclos (pasos de tiempo).
 - Permitir al usuario modificar parámetros como tasas de natalidad de las presas, tasa de caza de los depredadores.
 - Mostrar gráficamente en consola cómo cambian los números poblacionales en cada iteración.
@@ -11,6 +11,11 @@ Se busca simular un ecosistema cerrado donde interactúan los depredadores y las
 
 ## Descripción 
 Este proyecto es una simulación en C++ diseñada para modelar las interacciones entre poblaciones de depredadores y presas en un ecosistema cerrado. La simulación aprovecha los principios de la programación orientada a objetos para crear clases que representan cada población y aplica el **modelo de Lotka-Volterra** para calcular los cambios a lo largo del tiempo. Este proyecto proporciona una simulación simple basada en consola donde los usuarios pueden observar los cambios poblacionales basados en parámetros ajustables para las tasas de natalidad, mortalidad y depredación. 
+
+### Razones por las que lo hice
+Este proyecto nació del interés por combinar ecología y programación orientada a objetos. El modelo Lotka-Volterra es uno de los ejemplos más clásicos y accesibles dentro de la biología matemática, y llevarlo a código C++ permitió trabajar tanto la parte matemática como la estructuración lógica del software. Además, sirvió para practicar conceptos como herencia, encapsulamiento y polimorfismo, al representar a las especies como clases con características y comportamientos únicos.
+Otra motivación fue mostrar de forma visual cómo pequeñas variaciones en los parámetros pueden generar comportamientos completamente distintos, algo fundamental para la teoría del caos y la modelación de sistemas biológicos.
+
 ## Características 
 - **Modelado Orientado a Objetos**: Las poblaciones de depredadores y presas se modelan con clases separadas.
 - **Simulación por Intervalos de Tiempo**: Avanza en pequeños intervalos de tiempo discretos para mostrar los cambios poblacionales en cada intervalo.
